@@ -13,27 +13,28 @@ import org.springframework.web.bind.annotation.RestController;
 import course.hub.dto.UserDetailsUpdateDto;
 import course.hub.dto.UserRegisterDto;
 import course.hub.model.User;
-import course.hub.service.InstructorService;
+import course.hub.service.StudentService;
 
 @RestController
-@RequestMapping("/instructor")
-public class InstructorController {
+@RequestMapping("/student")
+public class StudentController {
 
 	@Autowired
-	private InstructorService service;
+	private StudentService service;
 	
-	@PostMapping("/register")
-	public ResponseEntity<User> registerInstructor(@RequestBody UserRegisterDto dto) {
-		return service.addInstructor(dto); 
+	@PostMapping
+	public ResponseEntity<User> register(@RequestBody UserRegisterDto dto){
+		return service.addStudent(dto);
 	}
 	
-	@PutMapping("/update")
-	public ResponseEntity<User> updateInstructorDetails(@RequestParam Integer id, @RequestBody UserDetailsUpdateDto dto){
-		return service.updateInstructorDetails(id, dto);
+	@PutMapping
+	public ResponseEntity<User> updateStudentDetails(@RequestParam Integer id, @RequestBody UserDetailsUpdateDto dto){
+		return service.updateStudentDetails(id, dto);
 	}
 	
-	@DeleteMapping("/delete")
-	public ResponseEntity<User> deleteInstructor(@RequestParam Integer id){
-		return service.deleteInstructor(id);
-	}	
+	@DeleteMapping
+	public ResponseEntity<User> deleteStudent(@RequestParam Integer id){
+		return service.deleteStudent(id);
+	}
+	
 }
