@@ -27,7 +27,7 @@ public class StudentService {
 			user.setEmail(dto.getEmail());
 			user.setUsername(dto.getUsername());
 			user.setPassword(dto.getPassword());
-			user.setRole(dto.getRole());
+			user.setRole(dto.getRole().STUDENT);
 			return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
 		}
 	}

@@ -27,7 +27,7 @@ public class InstructorService {
 			user.setPassword(dto.getPassword());
 			user.setUsername(dto.getUsername());
 			user.setEmail(dto.getEmail());
-			user.setRole(dto.getRole());
+			user.setRole(dto.getRole().INSTRUCTOR);
 			return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
 		}
 		

@@ -22,17 +22,17 @@ public class StudentController {
 	@Autowired
 	private StudentService service;
 	
-	@PostMapping
+	@PostMapping("/register")
 	public ResponseEntity<User> register(@RequestBody UserRegisterDto dto){
 		return service.addStudent(dto);
 	}
 	
-	@PutMapping
+	@PutMapping("/update")
 	public ResponseEntity<User> updateStudentDetails(@RequestParam Integer id, @RequestBody UserDetailsUpdateDto dto){
 		return service.updateStudentDetails(id, dto);
 	}
 	
-	@DeleteMapping
+	@DeleteMapping("/delete")
 	public ResponseEntity<User> deleteStudent(@RequestParam Integer id){
 		return service.deleteStudent(id);
 	}

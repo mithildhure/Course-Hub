@@ -60,7 +60,7 @@ public class User {
 	
 //	Student Mapping
 	@ManyToMany
-	@JoinTable(joinColumns = @JoinColumn(name = "student_id"),
+	@JoinTable(name = "students_enrolled",joinColumns = @JoinColumn(name = "student_id"),
 			   inverseJoinColumns = @JoinColumn(name = "course_id"))
 	private List<Course> enrolled;
 	
