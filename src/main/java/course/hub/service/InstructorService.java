@@ -19,13 +19,17 @@ public class InstructorService {
 	private UserRepo repo;
 	
 	public ResponseEntity<User> addInstructor(UserRegisterDto dto){
-		User user = new User();
-		user.setName(dto.getName());
-		user.setPassword(dto.getPassword());
-		user.setUsername(dto.getUsername());
-		user.setEmail(dto.getEmail());
-		user.setRole(dto.getRole());
-		return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
+		if (repo.existsByUsername(dto.getUsername()) || repo.existsByEmail(dto.getEmail())) {
+			throw new RuntimeException("Username or Email already Registered!");
+		} else {
+			User user = new User();
+			user.setName(dto.getName());
+			user.setPassword(dto.getPassword());
+			user.setUsername(dto.getUsername());
+			user.setEmail(dto.getEmail());
+			user.setRole(dto.getRole());
+			return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
+		}
 		
 	}
 	

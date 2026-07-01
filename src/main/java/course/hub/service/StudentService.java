@@ -19,19 +19,23 @@ public class StudentService {
 	private UserRepo repo;
 	
 	public ResponseEntity<User> addStudent(UserRegisterDto dto){
-		User user = new User();
-		user.setName(dto.getName());
-		user.setEmail(dto.getEmail());
-		user.setUsername(dto.getUsername());
-		user.setPassword(dto.getPassword());
-		user.setRole(dto.getRole());
-		return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
+		if (repo.existsByUsername(dto.getUsername()) || repo.existsByEmail(dto.getEmail())) {
+			throw new RuntimeException("Username Or Email Already Registered");
+		} else {
+			User user = new User();
+			user.setName(dto.getName());
+			user.setEmail(dto.getEmail());
+			user.setUsername(dto.getUsername());
+			user.setPassword(dto.getPassword());
+			user.setRole(dto.getRole());
+			return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
+		}
 	}
 	
 	public ResponseEntity<User> updateStudentDetails(Integer id, UserDetailsUpdateDto dto){
 		Optional<User> opt = repo.findById(id);
 		if (opt.isPresent()) {
-			User user = new User();
+			User user = opt.get();
 			user.setName(dto.getName());
 			user.setEmail(dto.getEmail());
 			user.setUsername(dto.getUsername());
