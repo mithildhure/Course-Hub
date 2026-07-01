@@ -50,7 +50,7 @@ public class Course {
 	@JoinColumn(name = "instructor_id")
 	private User instructor;
 	
-//	Student Mapping
+//	Student Mapping 
 	@ManyToMany(mappedBy = "enrolled")
 	private List<User> students;
 	
