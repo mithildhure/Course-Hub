@@ -22,18 +22,18 @@ public class InstructorController {
 	@Autowired
 	private InstructorService service;
 	
-	@PostMapping("/register")
-	public ResponseEntity<User> registerInstructor(@RequestBody UserRegisterDto dto) {
-		return service.addInstructor(dto); 
-	}
-	
-	@PutMapping("/update")
-	public ResponseEntity<User> updateInstructorDetails(@RequestParam Integer id, @RequestBody UserDetailsUpdateDto dto){
-		return service.updateInstructorDetails(id, dto);
-	}
-	
-	@DeleteMapping("/delete")
-	public ResponseEntity<User> deleteInstructor(@RequestParam Integer id){
-		return service.deleteInstructor(id);
-	}	
+//	@PostMapping("/register")
+//	public ResponseEntity<User> registerInstructor(@RequestBody UserRegisterDto dto) {
+//		return service.addInstructor(dto); 
+//	}
+//	
+//	@PutMapping("/update")
+//	public ResponseEntity<User> updateInstructorDetails(@RequestParam Integer id, @RequestBody UserDetailsUpdateDto dto){
+//		return service.updateInstructorDetails(id, dto);
+//	}
+//	
+//	@DeleteMapping("/delete")
+//	public ResponseEntity<User> deleteInstructor(@RequestParam Integer id){
+//		return service.deleteInstructor(id);
+//	}	
 }
