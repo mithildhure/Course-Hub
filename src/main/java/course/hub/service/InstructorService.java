@@ -58,7 +58,7 @@ public class InstructorService {
 //	update instructor course
 	public Course updateCourseDetails(Integer instructorId ,Integer courseId ,CourseDto dto) {
 		Course course = courseRepo.findById(courseId).orElseThrow(()->new RuntimeException("Course Not Found"));
-		if (course.getInstructor().getId() == instructorId) {
+		if (course.getInstructor().getId().equals(instructorId)) {
 			course.setCourseName(dto.getCourseName());
 			course.setDescription(dto.getDescription());
 			course.setDuration(dto.getDuration());
@@ -70,10 +70,15 @@ public class InstructorService {
 	}
 	
 //	delete instructor course
+//	next time will be using cascade probably
 	public String deleteCourse(Integer instructorId, Integer courseId) {
 		Course course = courseRepo.findById(courseId).orElseThrow(()->new RuntimeException("Course Not Found"));
-		if (course.getInstructor().getId() == instructorId) {
-			courseRepo.deleteById(courseId);
+		if (course.getInstructor().getId().equals(instructorId)) {
+			for(User student : course.getStudents()) {
+				student.getEnrolled().remove(course);
+			}
+			course.getStudents().clear();
+			courseRepo.delete(course);
 			return "course deleted!";
 		}else {
 			return "course not found!";

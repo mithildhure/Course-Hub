@@ -38,6 +38,5 @@ public class AuthController {
 	public ResponseEntity<List<Course>> home() {
 		return new ResponseEntity<List<Course>>(service.homePageCourses(), HttpStatus.OK);
 	}
-	
-	
+
 }

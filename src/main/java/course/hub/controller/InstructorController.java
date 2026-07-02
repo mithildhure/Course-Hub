@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -43,7 +44,7 @@ public class InstructorController {
 		return new ResponseEntity<Course>(service.addCourse(instructorId, dto), HttpStatus.OK);
 	}
 	
-	@PutMapping("/course/update/{instructorId}/{courseId}")
+	@PatchMapping("/course/update/{instructorId}/{courseId}")
 	public ResponseEntity<Course> updateCourse(@PathVariable Integer instructorId, @PathVariable Integer courseId, @RequestBody CourseDto dto){
 		return new ResponseEntity<Course>(service.updateCourseDetails(instructorId, courseId, dto), HttpStatus.OK);
 	}
