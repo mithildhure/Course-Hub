@@ -4,8 +4,6 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import course.hub.dto.CourseDto;
@@ -31,7 +29,7 @@ public class InstructorService {
 	}
 	
 //	Update profile
-	public ResponseEntity<User> updateInstructorDetails(Integer instructorId, UserDetailsUpdateDto dto){
+	public User updateInstructorDetails(Integer instructorId, UserDetailsUpdateDto dto){
 		Optional<User> opt = userRepo.findById(instructorId);
 		if (opt.isPresent()) {
 			User user = opt.get();
@@ -39,9 +37,9 @@ public class InstructorService {
 			user.setEmail(dto.getEmail());
 			user.setPassword(dto.getPassword());
 			user.setUsername(dto.getUsername());
-			return new ResponseEntity<User>(userRepo.save(user), HttpStatus.OK);
+			return userRepo.save(user);
 		}else {
-			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
+			return null;
 		}
 	}
 	
@@ -58,9 +56,9 @@ public class InstructorService {
 	}
 	
 //	update instructor course
-	public Course updateCourseDetails(Integer intructorId ,Integer courseId ,CourseDto dto) {
+	public Course updateCourseDetails(Integer instructorId ,Integer courseId ,CourseDto dto) {
 		Course course = courseRepo.findById(courseId).orElseThrow(()->new RuntimeException("Course Not Found"));
-		if (course.getInstructor().getId() == intructorId) {
+		if (course.getInstructor().getId() == instructorId) {
 			course.setCourseName(dto.getCourseName());
 			course.setDescription(dto.getDescription());
 			course.setDuration(dto.getDuration());
@@ -81,7 +79,5 @@ public class InstructorService {
 			return "course not found!";
 		}
 	}
-	
-	
 	
 }
