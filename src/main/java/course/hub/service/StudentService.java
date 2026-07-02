@@ -1,14 +1,12 @@
 package course.hub.service;
 
-import java.util.Optional;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import course.hub.dto.UserDetailsUpdateDto;
-import course.hub.dto.UserRegisterDto;
+import course.hub.model.Course;
 import course.hub.model.User;
 import course.hub.repo.UserRepo;
 
@@ -18,42 +16,18 @@ public class StudentService {
 	@Autowired
 	private UserRepo repo;
 	
-	public ResponseEntity<User> addStudent(UserRegisterDto dto){
-		if (repo.existsByUsername(dto.getUsername()) || repo.existsByEmail(dto.getEmail())) {
-			throw new RuntimeException("Username Or Email Already Registered");
-		} else {
-			User user = new User();
+	public List<Course> showStudentEnrolledCourses(Integer id){
+		User user = repo.findById(id).orElseThrow(()-> new RuntimeException("Student Not Found"));
+		return user.getEnrolled();
+	}
+	
+	public User updateProfile(Integer id, UserDetailsUpdateDto dto){
+		User user = repo.findById(id).orElseThrow(() -> new RuntimeException("User Not Found"));
 			user.setName(dto.getName());
 			user.setEmail(dto.getEmail());
 			user.setUsername(dto.getUsername());
 			user.setPassword(dto.getPassword());
-			user.setRole(dto.getRole().STUDENT);
-			return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
-		}
-	}
-	
-	public ResponseEntity<User> updateStudentDetails(Integer id, UserDetailsUpdateDto dto){
-		Optional<User> opt = repo.findById(id);
-		if (opt.isPresent()) {
-			User user = opt.get();
-			user.setName(dto.getName());
-			user.setEmail(dto.getEmail());
-			user.setUsername(dto.getUsername());
-			user.setPassword(dto.getPassword());
-			return new ResponseEntity<User>(repo.save(user), HttpStatus.OK);
-		}else {
-			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-		}
-	}
-	
-	public ResponseEntity<User> deleteStudent(Integer id){
-		Optional<User> opt = repo.findById(id);
-		if (opt.isPresent()) {
-			repo.deleteById(id);
-			return new ResponseEntity<User>(HttpStatus.OK);
-		}else {
-			return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
-		}
+			return repo.save(user);
 	}
 	
 }
