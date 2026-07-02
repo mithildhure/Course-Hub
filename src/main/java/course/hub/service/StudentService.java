@@ -4,13 +4,13 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import course.hub.dto.UserDetailsUpdateDto;
 import course.hub.model.Course;
 import course.hub.model.User;
 import course.hub.repo.CourseRepo;
 import course.hub.repo.UserRepo;
-import jakarta.transaction.Transactional;
 
 @Service
 public class StudentService {

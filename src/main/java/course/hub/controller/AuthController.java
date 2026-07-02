@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import course.hub.dto.UserLoginDto;
@@ -23,7 +24,7 @@ public class AuthController {
 	private AuthService service;
 	
 	@PostMapping("/register")
-	public ResponseEntity<User> registerUser(UserRegisterDto dto){
+	public ResponseEntity<User> registerUser(@RequestBody UserRegisterDto dto){
 		return new ResponseEntity<User>(service.register(dto),HttpStatus.OK);
 	}
 	
