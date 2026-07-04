@@ -52,5 +52,16 @@ public class AdminService {
 		}
 	}
 	
+//	Delete Student
+	public String deleteStudent(Integer id) {
+		Optional<User> opt = userRepo.findById(id);
+		if (opt.isPresent()) {
+			userRepo.deleteById(id);
+			return "Student deleted";
+		}else {
+			throw new RuntimeException("Student not found");
+		}
+	}
+	
 	
 }
