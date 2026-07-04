@@ -63,5 +63,16 @@ public class AdminService {
 		}
 	}
 	
+//	Course Delete
+	public String deleteCourse(Integer courseId) {
+		Optional<Course> opt = courseRepo.findById(courseId);
+		if (opt.isPresent()) {
+			courseRepo.deleteById(courseId);
+			return "course deleted";
+		}else {
+			throw new RuntimeException("Course not found");
+		}
+	}
+	
 	
 }
