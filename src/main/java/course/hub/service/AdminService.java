@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import course.hub.dto.CourseDto;
 import course.hub.dto.UserDetailsUpdateDto;
 import course.hub.model.Course;
 import course.hub.model.Role;
@@ -60,6 +61,21 @@ public class AdminService {
 			return "Student deleted";
 		}else {
 			throw new RuntimeException("Student not found");
+		}
+	}
+	
+//	Update Course
+	public Course updateCourse(Integer id, CourseDto dto) {
+		Optional<Course> opt = courseRepo.findById(id);
+		if(opt.isPresent()) {
+			Course c = opt.get();
+			c.setCourseName(dto.getCourseName());
+			c.setDescription(dto.getDescription());
+			c.setDuration(dto.getDuration());
+			c.setCategory(dto.getCategory());
+			return courseRepo.save(c);
+		}else {
+			throw new RuntimeException("Course not found");
 		}
 	}
 	
