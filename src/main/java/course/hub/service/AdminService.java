@@ -1,5 +1,6 @@
 package course.hub.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,6 +77,21 @@ public class AdminService {
 			return userRepo.save(user);
 		}else {
 			throw new RuntimeException("Instructor not found");
+		}
+	}
+	
+//	Delete Instructor
+	public String deleteInstructor(Integer instructorId) {
+		Optional<User> opt = userRepo.findById(instructorId);
+		if (opt.isPresent()) {
+			User user = opt.get();
+			for(Course course : user.getCourses()) {
+				course.setInstructor(null);
+			}
+			userRepo.deleteById(instructorId);
+			return "Instructor Deleted";
+		}else {
+			throw new RuntimeException("Intructor Not Found");
 		}
 	}
 	
