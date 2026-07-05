@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import course.hub.dto.CourseDto;
 import course.hub.dto.UserDetailsUpdateDto;
 import course.hub.model.Course;
 import course.hub.model.User;
@@ -60,7 +61,14 @@ public class AdminController {
 		return new ResponseEntity<String>(service.deleteInstructor(instructorId), HttpStatus.OK);
 	}
 	
+	@PutMapping("/course/update/{courseId}")
+	public ResponseEntity<Course> updateCourse(@PathVariable Integer courseId, @RequestBody CourseDto dto){
+		return new ResponseEntity<Course>(service.updateCourse(courseId, dto), HttpStatus.OK);
+	}
 	
-	
+	@DeleteMapping("/course/delete/{courseId}")
+	public ResponseEntity<String> deleteCourse(@PathVariable Integer courseId){
+		return new ResponseEntity<String>(service.deleteCourse(courseId), HttpStatus.OK);
+	}
 	
 }
