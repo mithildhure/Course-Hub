@@ -50,5 +50,9 @@ public class AdminController {
 		return new ResponseEntity<String>(service.deleteStudent(studentId), HttpStatus.OK);
 	}
 	
+//	public ResponseEntity<User> updateInstructor(@PathVariable Integer instructorId, @RequestBody UserDetailsUpdateDto dto){
+//		return new ResponseEntity<User>(service.upda);
+//	}
+	
 	
 }

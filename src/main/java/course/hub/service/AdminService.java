@@ -64,6 +64,21 @@ public class AdminService {
 		}
 	}
 	
+//	Update Instructor
+	public User updateInstructor(Integer instructorId, UserDetailsUpdateDto dto) {
+		Optional<User> opt = userRepo.findById(instructorId);
+		if (opt.isPresent()) {
+			User user = opt.get();
+			user.setName(dto.getName());
+			user.setEmail(dto.getEmail());
+			user.setUsername(dto.getUsername());
+			user.setPassword(dto.getPassword());
+			return userRepo.save(user);
+		}else {
+			throw new RuntimeException("Instructor not found");
+		}
+	}
+	
 //	Update Course
 	public Course updateCourse(Integer id, CourseDto dto) {
 		Optional<Course> opt = courseRepo.findById(id);
