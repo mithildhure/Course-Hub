@@ -50,9 +50,17 @@ public class AdminController {
 		return new ResponseEntity<String>(service.deleteStudent(studentId), HttpStatus.OK);
 	}
 	
-//	public ResponseEntity<User> updateInstructor(@PathVariable Integer instructorId, @RequestBody UserDetailsUpdateDto dto){
-//		return new ResponseEntity<User>(service.upda);
-//	}
+	@PutMapping("/instructor/update/{instructorId}")
+	public ResponseEntity<User> updateInstructor(@PathVariable Integer instructorId, @RequestBody UserDetailsUpdateDto dto){
+		return new ResponseEntity<User>(service.updateInstructor(instructorId, dto), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/instructor/delete/{instructorId}")
+	public ResponseEntity<String> deleteInstructor(@PathVariable Integer instructorId){
+		return new ResponseEntity<String>(service.deleteInstructor(instructorId), HttpStatus.OK);
+	}
+	
+	
 	
 	
 }
