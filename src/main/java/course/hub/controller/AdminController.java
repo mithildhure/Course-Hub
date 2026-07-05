@@ -5,10 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import course.hub.dto.UserDetailsUpdateDto;
 import course.hub.model.Course;
 import course.hub.model.User;
 import course.hub.service.AdminService;
@@ -34,5 +39,16 @@ public class AdminController {
 	public ResponseEntity<List<Course>> courseDashboard(){
 		return new ResponseEntity<List<Course>>(service.getAllCourse(), HttpStatus.OK);
 	}
+	
+	@PutMapping("/student/update/{studentId}")
+	public ResponseEntity<User> updateStudent(@PathVariable Integer studentId, @RequestBody UserDetailsUpdateDto dto){
+		return new ResponseEntity<User>(service.updateStudent(studentId, dto), HttpStatus.OK);
+	}
+	
+	@DeleteMapping("/student/delete/{studentId}")
+	public ResponseEntity<String> deleteStudent(@PathVariable Integer studentId){
+		return new ResponseEntity<String>(service.deleteStudent(studentId), HttpStatus.OK);
+	}
+	
 	
 }
