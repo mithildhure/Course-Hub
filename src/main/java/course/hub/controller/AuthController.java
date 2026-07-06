@@ -34,9 +34,9 @@ public class AuthController {
 		return new ResponseEntity<User>(HttpStatus.OK);
 	}
 	
-	@GetMapping("/home")
-	public ResponseEntity<List<Course>> home() {
-		return new ResponseEntity<List<Course>>(service.homePageCourses(), HttpStatus.OK);
-	}
+//	@GetMapping("/home")
+//	public ResponseEntity<List<Course>> home() {
+//		return new ResponseEntity<List<Course>>(service.homePageCourses(), HttpStatus.OK);
+//	}
 
 }

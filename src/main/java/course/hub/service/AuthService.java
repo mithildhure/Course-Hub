@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import course.hub.dto.UserLoginDto;
@@ -52,8 +53,12 @@ public class AuthService {
 		}
 	}
 	
-	public List<Course> homePageCourses(){
-		 return courseRepo.findAll();
-	}
+//	Pagination Required
+//	public Page<Course> homePageCourses(){
+//		
+//		
+//		
+//		 
+//	}
 	
 }
