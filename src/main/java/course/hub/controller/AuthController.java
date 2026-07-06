@@ -3,10 +3,12 @@ package course.hub.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import course.hub.dto.UserLoginDto;
@@ -34,9 +36,11 @@ public class AuthController {
 		return new ResponseEntity<User>(HttpStatus.OK);
 	}
 	
-//	@GetMapping("/home")
-//	public ResponseEntity<List<Course>> home() {
-//		return new ResponseEntity<List<Course>>(service.homePageCourses(), HttpStatus.OK);
-//	}
+//	Pagination 
+//	ALSO NOTE PUSH TO DEVELOP BEFORE PULLING OR IT WONT SHOW AT GITHUB
+	@GetMapping("/home")
+	public ResponseEntity<Page<Course>> home(@RequestParam(defaultValue = "0") Integer pageNumber, @RequestParam(defaultValue = "10", required = false) Integer pageSize) {
+		return new ResponseEntity<Page<Course>>(service.homePageCourses(pageNumber, pageSize), HttpStatus.OK);
+	}
 
 }
