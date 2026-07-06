@@ -5,6 +5,8 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import course.hub.dto.UserLoginDto;
@@ -54,11 +56,9 @@ public class AuthService {
 	}
 	
 //	Pagination Required
-//	public Page<Course> homePageCourses(){
-//		
-//		
-//		
-//		 
-//	}
+	public Page<Course> homePageCourses(Integer pageNumber, Integer PageSize){
+		Pageable pageable = PageRequest.of(pageNumber, PageSize);
+		return courseRepo.findAll(pageable); 
+	}
 	
 }
