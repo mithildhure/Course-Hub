@@ -35,7 +35,6 @@ public class AuthController {
 	}
 	
 //	Pagination 
-//	ALSO NOTE PUSH TO DEVELOP BEFORE PULLING OR IT WONT SHOW AT GITHUB
 	@GetMapping("/home")
 	public ResponseEntity<Page<Course>> home(@RequestParam(defaultValue = "0") Integer pageNumber, @RequestParam(defaultValue = "10", required = false) Integer pageSize) {
 		return new ResponseEntity<Page<Course>>(service.homePageCourses(pageNumber, pageSize), HttpStatus.OK);
