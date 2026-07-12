@@ -1,12 +1,13 @@
 package course.hub.service;
 
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import course.hub.dto.UserLoginDto;
@@ -25,6 +26,8 @@ public class AuthService {
 	@Autowired
 	private CourseRepo courseRepo;
 	
+	private PasswordEncoder encode = new BCryptPasswordEncoder(10);
+	
 	public User register(UserRegisterDto dto) {
 		if (userRepo.existsByUsername(dto.getUsername()) || userRepo.existsByEmail(dto.getEmail())) {
 			throw new RuntimeException("Username Or Email Already Registered");
@@ -33,7 +36,7 @@ public class AuthService {
 			user.setName(dto.getName());
 			user.setEmail(dto.getEmail());
 			user.setUsername(dto.getUsername());
-			user.setPassword(dto.getPassword());
+			user.setPassword(encode.encode(dto.getPassword()));
 			user.setRole(dto.getRole());
 			userRepo.save(user);
 			return user;

@@ -6,10 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import course.hub.dto.UserLoginDto;
 import course.hub.dto.UserRegisterDto;
 import course.hub.model.Course;
 import course.hub.model.User;
@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 
 @RestController
+@RequestMapping("/auth")
 public class AuthController {
 
 	@Autowired
@@ -28,11 +29,11 @@ public class AuthController {
 		return new ResponseEntity<User>(service.register(dto),HttpStatus.OK);
 	}
 	
-	@PostMapping("/login")
-	public ResponseEntity<User> loginUser(UserLoginDto dto){
-		service.login(dto);
-		return new ResponseEntity<User>(HttpStatus.OK);
-	}
+//	@PostMapping("/login")
+//	public ResponseEntity<User> loginUser(UserLoginDto dto){
+//		service.login(dto);
+//		return new ResponseEntity<User>(HttpStatus.OK);
+//	}
 	
 //	Pagination 
 	@GetMapping("/home")
